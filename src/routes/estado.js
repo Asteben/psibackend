@@ -118,9 +118,9 @@ router.delete("/estado/:id", [md_auth.ensureAuth], async (req, res) => {
   );
 });
 
-router.put("/estado/:id", isLoggedIn, async (req, res) => {
+router.put("/estado/:id", [md_auth.ensureAuth], async (req, res) => {
   const id_Estado = req.params.id;
-  const { id_Estado, nombre } = req.body;
+  const { nombre } = req.body;
   pool.query(
     "UPDATE Estado SET nombre = (?) WHERE id_Estado = (?)",
     [nombre, id_Estado],

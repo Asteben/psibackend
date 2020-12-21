@@ -50,7 +50,7 @@ router.get("/prevision-salud/:id", [md_auth.ensureAuth], async (req, res) => {
 
 router.put("/prevision-salud/:id", [md_auth.ensureAuth], async (req, res) => {
   const id_PrevisionSalud = req.params.id;
-  const { id_PrevisionSalud, nombre } = req.body;
+  const { nombre } = req.body;
   pool.query(
     "UPDATE PrevisionSalud SET nombre = (?) WHERE id_Estado = (?)",
     [nombre, id_PrevisionSalud],
