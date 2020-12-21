@@ -23,6 +23,66 @@ router.get("/paciente", [md_auth.ensureAuth], async (req, res) => {
   });
 });
 
+router.get("/paciente/consultante", [md_auth.ensureAuth], async (req, res) => {
+  pool.query("SELECT * FROM Paciente WHERE Estado_id_Estado = 1", async (err, rows) => {
+    if (!err) {
+      res.send({
+        code: 200,
+        message: "Pacientes retornados con exito!",
+        rows,
+      });
+      console.log("Pacientes retornados con exito!");
+      console.log(rows);
+    } else {
+      res.send({
+        code: 400,
+        msg: "un error ha ocurrido",
+      });
+      console.log(err);
+    }
+  });
+});
+
+router.get("/paciente/paciente", [md_auth.ensureAuth], async (req, res) => {
+  pool.query("SELECT * FROM Paciente WHERE Estado_id_Estado = 2", async (err, rows) => {
+    if (!err) {
+      res.send({
+        code: 200,
+        message: "Pacientes retornados con exito!",
+        rows,
+      });
+      console.log("Pacientes retornados con exito!");
+      console.log(rows);
+    } else {
+      res.send({
+        code: 400,
+        msg: "un error ha ocurrido",
+      });
+      console.log(err);
+    }
+  });
+});
+
+router.get("/paciente/incontestado", [md_auth.ensureAuth], async (req, res) => {
+  pool.query("SELECT * FROM Paciente WHERE Estado_id_Estado = 3", async (err, rows) => {
+    if (!err) {
+      res.send({
+        code: 200,
+        message: "Pacientes retornados con exito!",
+        rows,
+      });
+      console.log("Pacientes retornados con exito!");
+      console.log(rows);
+    } else {
+      res.send({
+        code: 400,
+        msg: "un error ha ocurrido",
+      });
+      console.log(err);
+    }
+  });
+});
+
 router.get("/paciente/:rut", [md_auth.ensureAuth], async (req, res) => {
   const rut = req.params.rut;
   pool.query("SELECT * FROM Paciente WHERE RUT = ?", rut, async (err, rows) => {
