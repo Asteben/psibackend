@@ -59,6 +59,8 @@ app.use(require("./routes/hechosconsultantes"));
 app.use(require("./routes/motivo"));
 app.use(require("./routes/paciente"));
 app.use(require("./routes/contacto"));
+app.use(require("./routes/estado"));
+app.use(require("./routes/previsionsalud"));
 app.use(
   "/home",
   passport.authenticate("jwt", { session: false }),

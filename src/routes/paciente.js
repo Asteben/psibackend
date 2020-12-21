@@ -106,30 +106,32 @@ router.get("/paciente/:rut", [md_auth.ensureAuth], async (req, res) => {
 
 router.post("/paciente/nuevo", [md_auth.ensureAuth], async (req, res) => {
   const {
-    rut,
+    RUT,
     nombre,
     nombre_social,
     pronombre,
     genero,
     sexo,
     apellido,
-    id_PrevisionSalud,
+    PrevisionSalud_id_PrevisionSalud,
+    Estado_id_Estado,
     fecha_nacimiento,
     fecha_ingreso,
   } = req.body;
   pool.query(
-    "INSERT INTO Paciente (RUT, nombre, nombre_social, pronombre, genero, sexo, apellido, PrevisionSalud_id_PrevisionSalud, fecha_nacimiento,fecha_ingreso) VALUES (?,?,?,?,?,?,?,?,?,?)",
+    "INSERT INTO Paciente (RUT, nombre, nombre_social, pronombre, genero, sexo, apellido, PrevisionSalud_id_PrevisionSalud, fecha_nacimiento,fecha_ingreso,Estado_id_Estado) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
     [
-      rut,
+      RUT,
       nombre,
       nombre_social,
       pronombre,
       genero,
       sexo,
       apellido,
-      id_PrevisionSalud,
+      PrevisionSalud_id_PrevisionSalud,
       new Date(fecha_nacimiento),
       new Date(fecha_ingreso),
+      Estado_id_Estado,
     ],
     async (err, rows) => {
       if (!err) {
