@@ -70,11 +70,11 @@ router.post("/derivacion/nuevo", [md_auth.ensureAuth], async (req, res) => {
                   (SELECT nombre FROM Motivo WHERE id_Motivo = ?),\n\
                   (SELECT Convenio.nombre FROM (Convenio\n\
                       INNER JOIN Coordinador ON Convenio.id_Convenio = Coordinador.Convenio_id_Convenio\n\
-                      INNER JOIN Derivacion ON Coordinador.id_Coordinador = ?)),\n\
+                      INNER JOIN Derivacion ON Coordinador.id_Coordinador = ?)LIMIT 1),\n\
                   (SELECT TipoInstitucion.nombre FROM (TipoInstitucion\n\
                       INNER JOIN Convenio ON TipoInstitucion.id_TipoInstitucion = Convenio.TipoInstitucion_id_TipoInstitucion\n\
                       INNER JOIN Coordinador ON Convenio.id_Convenio = Coordinador.Convenio_id_Convenio\n\
-                      INNER JOIN Derivacion ON Coordinador.id_Coordinador = ?)),\n\
+                      INNER JOIN Derivacion ON Coordinador.id_Coordinador = ?)LIMIT 1),\n\
                   (SELECT nombre FROM PrevisionSalud WHERE id_PrevisionSalud = (SELECT PrevisionSalud_id_PrevisionSalud FROM Paciente WHERE RUT = ?)),\n\
                   (SELECT nombre FROM Estado WHERE id_Estado = (SELECT Estado_id_Estado FROM Paciente WHERE RUT = ?)));",
     [
