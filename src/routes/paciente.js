@@ -22,65 +22,75 @@ router.get("/paciente", [md_auth.ensureAuth], async (req, res) => {
     }
   });
 });
-
+//pacientes con estados de consultante
 router.get("/paciente/consultante", [md_auth.ensureAuth], async (req, res) => {
-  pool.query("SELECT * FROM Paciente WHERE Estado_id_Estado = 1", async (err, rows) => {
-    if (!err) {
-      res.send({
-        code: 200,
-        message: "Pacientes retornados con exito!",
-        rows,
-      });
-      console.log("Pacientes retornados con exito!");
-      console.log(rows);
-    } else {
-      res.send({
-        code: 400,
-        msg: "un error ha ocurrido",
-      });
-      console.log(err);
+  pool.query(
+    "SELECT * FROM Paciente WHERE Estado_id_Estado = 1",
+    async (err, rows) => {
+      if (!err) {
+        res.send({
+          code: 200,
+          message: "Pacientes retornados con exito!",
+          rows,
+        });
+        console.log("Pacientes retornados con exito!");
+        console.log(rows);
+      } else {
+        res.send({
+          code: 400,
+          msg: "un error ha ocurrido",
+        });
+        console.log(err);
+      }
     }
-  });
+  );
 });
-
+//pacientes con estado de peciante
 router.get("/paciente/paciente", [md_auth.ensureAuth], async (req, res) => {
-  pool.query("SELECT * FROM Paciente WHERE Estado_id_Estado = 2", async (err, rows) => {
-    if (!err) {
-      res.send({
-        code: 200,
-        message: "Pacientes retornados con exito!",
-        rows,
-      });
-      console.log("Pacientes retornados con exito!");
-      console.log(rows);
-    } else {
-      res.send({
-        code: 400,
-        msg: "un error ha ocurrido",
-      });
-      console.log(err);
+  pool.query(
+    "SELECT * FROM Paciente WHERE Estado_id_Estado = 2",
+    async (err, rows) => {
+      if (!err) {
+        res.send({
+          code: 200,
+          message: "Pacientes retornados con exito!",
+          rows,
+        });
+        console.log("Pacientes retornados con exito!");
+        console.log(rows);
+      } else {
+        res.send({
+          code: 400,
+          msg: "un error ha ocurrido",
+        });
+        console.log(err);
+      }
     }
-  });
+  );
 });
 
+// pacientes incontestados
 router.get("/paciente/incontestado", [md_auth.ensureAuth], async (req, res) => {
-  pool.query("SELECT * FROM Paciente WHERE Estado_id_Estado = 3", async (err, rows) => {
-    if (!err) {
-      res.send({
-        code: 200,
-        message: "Pacientes retornados con exito!",
-        rows,
-      });
-      console.log("Pacientes retornados con exito!");
-      console.log(rows);
-    } else {
-      res.send({
-        code: 400,
-        msg: "un error ha ocurrido",
-      });
-      console.log(err);
+  pool.query(
+    "SELECT * FROM Paciente WHERE Estado_id_Estado = 3",
+    async (err, rows) => {
+      if (!err) {
+        res.send({
+          code: 200,
+          message: "Pacientes retornados con exito!",
+          rows,
+        });
+        console.log("Pacientes retornados con exito!");
+        console.log(rows);
+      } else {
+        res.send({
+          code: 400,
+          msg: "un error ha ocurrido",
+        });
+        console.log(err);
+      }
     }
-  });
+  );
 });
 
 router.get("/paciente/:rut", [md_auth.ensureAuth], async (req, res) => {
@@ -103,6 +113,8 @@ router.get("/paciente/:rut", [md_auth.ensureAuth], async (req, res) => {
     }
   });
 });
+
+//ingresar paciente
 
 router.post("/paciente/nuevo", [md_auth.ensureAuth], async (req, res) => {
   const {
@@ -152,7 +164,9 @@ router.post("/paciente/nuevo", [md_auth.ensureAuth], async (req, res) => {
   );
 });
 
-router.put("/paciente:rut", [md_auth.ensureAuth], async (req, res) => {
+//actualizar paciente por rut
+
+router.post("/paciente:rut", [md_auth.ensureAuth], async (req, res) => {
   const RUT = req.params.rut;
   const {
     nombre,
@@ -163,10 +177,11 @@ router.put("/paciente:rut", [md_auth.ensureAuth], async (req, res) => {
     apellido,
     Prevision_id_PrevisionSalud,
     fecha_nacimiento,
+    fecha_ingreso,
     Estado_id_Estado,
   } = req.body;
   pool.query(
-    "UPDATE Paciente SET nombre = (?),  nombre_social = (?),  pronombre = (?),  genero = (?),  sexo = (?),  apellido = (?),  PrevisionSalud_id_PrevisionSalud = (?),  fecha_nacimiento = (?),  Estado_id_Estado = (?) WHERE RUT = (?)",
+    "UPDATE Paciente SET nombre = (?),  nombre_social = (?),  pronombre = (?),  genero = (?),  sexo = (?),  apellido = (?),  PrevisionSalud_id_PrevisionSalud = (?),  fecha_nacimiento = (?),fecha_ingreso = (?)  Estado_id_Estado = (?) WHERE RUT = (?)",
     [
       nombre,
       nombre_social,
@@ -176,6 +191,7 @@ router.put("/paciente:rut", [md_auth.ensureAuth], async (req, res) => {
       apellido,
       Prevision_id_PrevisionSalud,
       new Date(fecha_nacimiento),
+      new Date(fecha_ingreso),
       Estado_id_Estado,
       RUT,
     ],
@@ -197,8 +213,11 @@ router.put("/paciente:rut", [md_auth.ensureAuth], async (req, res) => {
     }
   );
 });
+
+//eliminar paciente por rut
 router.delete("/paciente/:rut", [md_auth.ensureAuth], async (req, res) => {
   const { rut } = req.params;
+
   pool.query("DELETE FROM Paciente WHERE RUT = ?", [rut], async (err, rows) => {
     if (!err) {
       res.send({

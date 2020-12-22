@@ -49,10 +49,20 @@ router.get("/convenio/:id", [md_auth.ensureAuth], async (req, res) => {
 });
 
 router.post("/convenio/nuevo", [md_auth.ensureAuth], async (req, res) => {
-  const { id_TipoInstitucion, nombre, fecha_inicio, estado } = req.body;
+  const {
+    TipoInstitucion_id_TipoInstitucion,
+    nombre,
+    fecha_inicio,
+    estado,
+  } = req.body;
   pool.query(
     "INSERT INTO Convenio (TipoInstitucion_id_Tipoinstitucion, nombre, fecha_inicio, estado) VALUES (?,?,?,?)",
-    [id_TipoInstitucion, nombre, new Date(fecha_inicio), estado],
+    [
+      TipoInstitucion_id_TipoInstitucion,
+      nombre,
+      new Date(fecha_inicio),
+      estado,
+    ],
     async (err, rows) => {
       if (!err) {
         res.send({
@@ -94,7 +104,7 @@ router.delete("/convenio/:id", [md_auth.ensureAuth], async (req, res) => {
   );
 });
 
-router.put("/convenio/:id", [md_auth.ensureAuth], async (req, res) => {
+router.post("/convenio/:id", [md_auth.ensureAuth], async (req, res) => {
   const id_Convenio = req.params.id;
   const {
     TipoInstitucion_id_TipoInstitucion,

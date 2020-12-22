@@ -73,6 +73,7 @@ router.get("/contacto/rut/:rut", [md_auth.ensureAuth], async (req, res) => {
 
 router.post("/contacto/nuevo", [md_auth.ensureAuth], async (req, res) => {
   const { encargado, fecha, respuesta, descripcion, rut } = req.body;
+  console.log("datos:", req.body);
   pool.query(
     "INSERT INTO Contacto (encargado, fecha, respuesta, descripcion, Paciente_RUT) VALUES (?,?,?,?,?)",
     [encargado, new Date(fecha), respuesta, descripcion, rut],
