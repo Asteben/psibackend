@@ -493,3 +493,17 @@ INSERT INTO Permiso (TipoUsuario_id_TipoUsuario, Politica_id_Politica) VALUES (4
 INSERT INTO Permiso (TipoUsuario_id_TipoUsuario, Politica_id_Politica) VALUES (4,9);
 INSERT INTO Permiso (TipoUsuario_id_TipoUsuario, Politica_id_Politica) VALUES (4,10);
 INSERT INTO Permiso (TipoUsuario_id_TipoUsuario, Politica_id_Politica) VALUES (4,11);
+INSERT INTO Tipoinstitucion (nombre) VALUES ("universidad");
+INSERT INTO Tipoinstitucion (nombre) VALUES ("colegio");
+INSERT INTO Tipoinstitucion (nombre) VALUES ("fundacion");
+INSERT INTO Tipoinstitucion (nombre) VALUES ("institucion publica");
+INSERT INTO Tipoinstitucion (nombre) VALUES ("sindicato");
+INSERT INTO Tipoinstitucion (nombre) VALUES ("corporacion");
+INSERT INTO Motivo (nombre) VALUES ("voluntario");
+INSERT INTO Motivo (nombre) VALUES ("tristeza");
+INSERT INTO Motivo (nombre) VALUES ("estres");
+INSERT INTO Motivo (nombre) VALUES ("crisis de panico");
+INSERT INTO Motivo (nombre) VALUES ("hiperactividad");
+INSERT INTO Motivo (nombre) VALUES ("retomar terapia");
+INSERT INTO Motivo (nombre) VALUES ("bajo rendimiento academico");
+INSERT INTO Motivo (nombre) VALUES ("defecit de atencion");
