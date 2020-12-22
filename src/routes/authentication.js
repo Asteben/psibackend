@@ -60,7 +60,7 @@ router.post("/signup", async (req, res, next) => {
 });
 
 router.get("/logout", (req, res) => {
-  res.send("LogOut exitoso");
+  res.send("Finalizando sesion...");
 });
 
 module.exports = router;
