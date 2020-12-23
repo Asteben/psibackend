@@ -45,6 +45,35 @@ router.get("/paciente/consultante", [md_auth.ensureAuth], async (req, res) => {
     }
   );
 });
+
+//Rut de pacientes con estados de consultante
+router.get(
+  "/paciente/consultante/rut",
+  [md_auth.ensureAuth],
+  async (req, res) => {
+    pool.query(
+      "SELECT Paciente.RUT, Paciente.nombre, Paciente.apellido  FROM Paciente WHERE Estado_id_Estado = 1",
+      async (err, rows) => {
+        if (!err) {
+          res.send({
+            code: 200,
+            message: "Pacientes retornados con exito!",
+            rows,
+          });
+          console.log("Pacientes retornados con exito!");
+          console.log(rows);
+        } else {
+          res.send({
+            code: 400,
+            msg: "un error ha ocurrido",
+          });
+          console.log(err);
+        }
+      }
+    );
+  }
+);
+
 //pacientes con estado de peciante
 router.get("/paciente/paciente", [md_auth.ensureAuth], async (req, res) => {
   pool.query(

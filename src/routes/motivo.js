@@ -9,7 +9,7 @@ router.get("/motivo", [md_auth.ensureAuth], async (req, res) => {
       res.send({
         code: 200,
         message: "Motivos retornados con exito!",
-        data: rows,
+        rows,
       });
       console.log("Motivos retornados con exito!");
       console.log(rows);
